@@ -1,0 +1,363 @@
+<section
+  id="dk-hero-{{ section.id }}"
+  class="dk-hero-section"
+  style="background-color: {{ section.settings.bg_color | default: '#F9F5EE' }};"
+  data-autoplay="{{ section.settings.autoplay | default: 'true' }}"
+  data-interval="{{ section.settings.autoplay_speed | default: 5000 }}"
+>
+  <div class="dk-hero-slider" id="dkHeroSlider-{{ section.id }}">
+    
+    <!-- SLIDE 1 -->
+    <div class="dk-hero-slide active" data-slide="0">
+      <div class="dk-hero__media">
+        <img
+          src="{{ 'dk-hero-banner-1.jpg' | asset_url }}"
+          alt="Some Memories are tied forever — Delisha Karigari"
+          class="dk-hero__img"
+          loading="eager"
+          width="2800"
+          height="1400"
+        >
+        <div class="dk-hero__overlay" style="background: linear-gradient(180deg, rgba(37,37,37,0.1) 0%, rgba(37,37,37,0.35) 100%);"></div>
+      </div>
+      <div class="dk-hero__content-container container">
+        <div class="dk-hero__content text-center">
+          <a href="{{ routes.all_products_collection_url }}" class="dk-btn dk-btn-primary dk-hero__btn">
+            SHOP RAKHI COLLECTION
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="dk-hero-slide" data-slide="1">
+      <div class="dk-hero__media">
+        <img
+          src="{{ 'dk-hero-banner-2.jpg' | asset_url }}"
+          alt="Sisters Are Sometimes Chosen — Delisha Karigari"
+          class="dk-hero__img"
+          loading="lazy"
+          width="2800"
+          height="1400"
+        >
+        <div class="dk-hero__overlay" style="background: linear-gradient(180deg, rgba(37,37,37,0.1) 0%, rgba(37,37,37,0.35) 100%);"></div>
+      </div>
+      <div class="dk-hero__content-container container">
+        <div class="dk-hero__content text-center">
+          <a href="{{ routes.collections_url }}/nazariya-collection" class="dk-btn dk-btn-primary dk-hero__btn">
+            EXPLORE SISTER GIFTS
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="dk-hero-slide" data-slide="2">
+      <div class="dk-hero__media">
+        <img
+          src="{{ 'dk-hero-banner-3.jpg' | asset_url }}"
+          alt="The First Rakhi, After Marriage — Delisha Karigari"
+          class="dk-hero__img"
+          loading="lazy"
+          width="2800"
+          height="1400"
+        >
+        <div class="dk-hero__overlay" style="background: linear-gradient(180deg, rgba(37,37,37,0.1) 0%, rgba(37,37,37,0.35) 100%);"></div>
+      </div>
+      <div class="dk-hero__content-container container">
+        <div class="dk-hero__content text-center">
+          <a href="{{ routes.collections_url }}/royal-pearl-rakhi-collection" class="dk-btn dk-btn-primary dk-hero__btn">
+            EXPLORE BHAIYA BHABHI SETS
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAVIGATION ARROWS -->
+    <button type="button" class="dk-hero-arrow dk-hero-arrow--prev" aria-label="Previous Slide" onclick="dkHeroPrevSlide('{{ section.id }}')">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button type="button" class="dk-hero-arrow dk-hero-arrow--next" aria-label="Next Slide" onclick="dkHeroNextSlide('{{ section.id }}')">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+
+    <!-- DOT INDICATORS -->
+    <div class="dk-hero-dots" role="tablist" aria-label="Hero Slides">
+      <button type="button" class="dk-hero-dot active" role="tab" aria-label="Slide 1" onclick="dkHeroGoToSlide('{{ section.id }}', 0)"></button>
+      <button type="button" class="dk-hero-dot" role="tab" aria-label="Slide 2" onclick="dkHeroGoToSlide('{{ section.id }}', 1)"></button>
+      <button type="button" class="dk-hero-dot" role="tab" aria-label="Slide 3" onclick="dkHeroGoToSlide('{{ section.id }}', 2)"></button>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .dk-hero-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  .dk-hero-slider {
+    position: relative;
+    width: 100%;
+    min-height: {{ section.settings.desktop_height | default: 80 }}vh;
+    overflow: hidden;
+  }
+  .dk-hero-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+  .dk-hero-slide.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+  }
+  .dk-hero__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  .dk-hero__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .dk-hero__overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .dk-hero__content-container {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    padding: var(--dk-space-xl, 2rem) var(--dk-space-md, 1rem);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100%;
+    padding-bottom: 70px;
+  }
+  .dk-hero__content {
+    max-width: 800px;
+  }
+  .dk-hero__btn {
+    display: inline-block;
+    padding: 14px 36px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+  }
+  .dk-hero__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.4);
+  }
+
+  /* ARROWS */
+  .dk-hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dk-color-text, #252525);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  }
+  .dk-hero-arrow:hover {
+    background: rgba(255,255,255,0.95);
+    color: var(--dk-color-primary, #6E1F2A);
+    transform: translateY(-50%) scale(1.08);
+  }
+  .dk-hero-arrow--prev { left: 24px; }
+  .dk-hero-arrow--next { right: 24px; }
+
+  /* DOTS */
+  .dk-hero-dots {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .dk-hero-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    border: 2px solid #FFFFFF;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+  }
+  .dk-hero-dot.active {
+    background: var(--dk-color-primary, #6E1F2A);
+    border-color: #FFFFFF;
+    width: 28px;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .dk-hero-slider {
+      min-height: {{ section.settings.mobile_height | default: 65 }}vh;
+    }
+    .dk-hero-arrow {
+      width: 38px;
+      height: 38px;
+    }
+    .dk-hero-arrow--prev { left: 10px; }
+    .dk-hero-arrow--next { right: 10px; }
+    .dk-hero__btn {
+      padding: 12px 24px;
+      font-size: 0.78rem;
+    }
+    .dk-hero__content-container {
+      padding-bottom: 50px;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const slider = document.getElementById('dkHeroSlider-{{ section.id }}');
+    if (!slider) return;
+
+    let currentSlide = 0;
+    const slides = slider.querySelectorAll('.dk-hero-slide');
+    const dots = slider.querySelectorAll('.dk-hero-dot');
+    const totalSlides = slides.length;
+    let slideTimer = null;
+
+    function showSlide(index) {
+      if (index < 0) index = totalSlides - 1;
+      if (index >= totalSlides) index = 0;
+      currentSlide = index;
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentSlide);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    window.dkHeroNextSlide = function(sectionId) {
+      showSlide(currentSlide + 1);
+      resetAutoPlay();
+    };
+
+    window.dkHeroPrevSlide = function(sectionId) {
+      showSlide(currentSlide - 1);
+      resetAutoPlay();
+    };
+
+    window.dkHeroGoToSlide = function(sectionId, index) {
+      showSlide(index);
+      resetAutoPlay();
+    };
+
+    function startAutoPlay() {
+      slideTimer = setInterval(() => {
+        showSlide(currentSlide + 1);
+      }, 5000);
+    }
+
+    function resetAutoPlay() {
+      if (slideTimer) clearInterval(slideTimer);
+      startAutoPlay();
+    }
+
+    startAutoPlay();
+
+    // Pause on hover
+    slider.addEventListener('mouseenter', () => {
+      if (slideTimer) clearInterval(slideTimer);
+    });
+    slider.addEventListener('mouseleave', () => {
+      startAutoPlay();
+    });
+
+    // Touch swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    slider.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) {
+        window.dkHeroNextSlide('{{ section.id }}');
+      } else if (touchEndX - touchStartX > 50) {
+        window.dkHeroPrevSlide('{{ section.id }}');
+      }
+    }, { passive: true });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "DK Hero Slider",
+  "settings": [
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Desktop Height",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "min": 40,
+      "max": 90,
+      "step": 5,
+      "unit": "vh",
+      "label": "Mobile Height",
+      "default": 65
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#F9F5EE"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DK Hero Slider"
+    }
+  ]
+}
+{% endschema %}

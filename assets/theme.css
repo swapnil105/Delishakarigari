@@ -1,0 +1,695 @@
+/* ==========================================================================
+   DELISHA KARIGARI — BRAND DESIGN SYSTEM & CORE CSS ARCHITECTURE
+   Brand Identity: Premium, Elegant, Modern Indian, Handcrafted & Festive
+   ========================================================================== */
+
+/* 1. CENTRALIZED BRAND CSS CUSTOM PROPERTIES */
+:root {
+  /* Color Palette — Modern Indian Luxury */
+  --dk-color-background: #F9F5EE;           /* Primary Background: Warm Ivory */
+  --dk-color-background-secondary: #F2E5DD; /* Secondary Background: Soft Nude / Sand */
+  --dk-color-primary: #6E1F2A;              /* Primary Accent: Deep Royal Burgundy / Maroon */
+  --dk-color-primary-hover: #541720;        /* Hover Dark Burgundy */
+  --dk-color-gold: #B89552;                 /* Muted Champagne Gold */
+  --dk-color-gold-hover: #a28245;           /* Hover Gold */
+  --dk-color-text: #252525;                 /* Primary Body Text: Soft Charcoal */
+  --dk-color-text-muted: #555555;           /* Muted Body Text */
+  --dk-color-white: #FFFFFF;                /* Pure White */
+  --dk-color-border: rgba(110, 31, 42, 0.12); /* Delicate Subtle Burgundy Border */
+  --dk-color-border-subtle: rgba(0, 0, 0, 0.08);
+
+  /* Legacy & Theme Compatibility Mapping */
+  --color-primary: var(--dk-color-primary);
+  --color-background: var(--dk-color-background);
+  --color-text: var(--dk-color-text);
+  --color-gold: var(--dk-color-gold);
+
+  /* Typography System */
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --dk-font-heading: var(--font-heading);
+  --dk-font-body: var(--font-body);
+
+  /* Spacing Scale (Generous Whitespace System) */
+  --dk-space-xs: 0.25rem;   /* 4px */
+  --dk-space-sm: 0.5rem;    /* 8px */
+  --dk-space-md: 1rem;      /* 16px */
+  --dk-space-lg: 1.5rem;    /* 24px */
+  --dk-space-xl: 2.5rem;    /* 40px */
+  --dk-space-2xl: 4rem;     /* 64px */
+
+  /* Component Surfaces & Radius */
+  --radius: 8px;            /* Refined subtle radius */
+  --dk-radius-sm: 4px;
+  --dk-radius-md: 8px;
+  --dk-radius-lg: 12px;
+  --dk-radius-pill: 40px;
+
+  /* Shadows & Elevation */
+  --shadow: 0 4px 20px rgba(110, 31, 42, 0.05);
+  --dk-shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.04);
+  --dk-shadow-hover: 0 8px 25px rgba(110, 31, 42, 0.09);
+
+  /* Timing & Transitions */
+  --transition: all 0.3s ease;
+  --dk-transition: all 0.3s ease;
+  --dk-transition-fast: all 0.15s ease;
+}
+
+/* 2. BASE RESET & ACCESSIBILITY */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--dk-font-body);
+  background-color: var(--dk-color-background);
+  color: var(--dk-color-text);
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* Focus Visible for Accessibility */
+:focus-visible {
+  outline: 2px solid var(--dk-color-primary);
+  outline-offset: 2px;
+}
+
+/* 3. TYPOGRAPHY HIERARCHY */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.page-title,
+.dk-heading {
+  font-family: var(--dk-font-heading);
+  color: var(--dk-color-text);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin-top: 0;
+}
+
+h1, .h1 { font-size: clamp(2rem, 4vw, 3rem); }
+h2, .h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
+h3, .h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
+h4, .h4 { font-size: 1.25rem; }
+h5, .h5 { font-size: 1.1rem; }
+h6, .h6 { font-size: 1rem; }
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--dk-space-md);
+}
+
+.dk-subtitle {
+  font-family: var(--dk-font-body);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--dk-color-gold);
+  font-weight: 600;
+  margin-bottom: var(--dk-space-xs);
+  display: block;
+}
+
+/* 4. LAYOUT & CONTAINERS */
+.container,
+.dk-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 var(--dk-space-lg);
+}
+
+/* ==========================================================================
+   DELISHA KARIGARI — HEADER & NAVIGATION COMPONENT
+   ========================================================================== */
+.dk-header {
+  width: 100%;
+  background-color: var(--dk-color-background);
+  border-bottom: 1px solid var(--dk-color-border);
+  position: relative;
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dk-header--sticky {
+  position: sticky;
+  top: 0;
+  box-shadow: 0 4px 20px rgba(110, 31, 42, 0.05);
+}
+
+/* Header Top Row */
+.dk-header__top {
+  border-bottom: 1px solid var(--dk-color-border);
+  padding: var(--dk-space-sm) 0;
+}
+
+.dk-header__top-container {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.dk-header__left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Mobile Toggle Trigger */
+.dk-header__toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--dk-color-text);
+  cursor: pointer;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Brand Wordmark & Logo (Center Aligned) */
+.dk-header__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.dk-header__logo-link {
+  text-decoration: none;
+  color: inherit;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dk-header__logo-img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.dk-header__wordmark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  line-height: 1;
+}
+
+.dk-header__wordmark-primary {
+  font-family: var(--dk-font-heading);
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--dk-color-primary);
+  text-transform: uppercase;
+}
+
+.dk-header__wordmark-secondary {
+  font-family: var(--dk-font-body);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 5px;
+  color: var(--dk-color-gold);
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+.dk-header__wordmark--mobile .dk-header__wordmark-primary {
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+
+.dk-header__wordmark--mobile .dk-header__wordmark-secondary {
+  font-size: 0.55rem;
+  letter-spacing: 4px;
+}
+
+/* Action Icons (Search, Account, Wishlist, Cart) */
+.dk-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--dk-space-xs);
+}
+
+.dk-header__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--dk-color-text);
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  border-radius: 50%;
+  transition: var(--dk-transition);
+}
+
+.dk-header__icon-btn:hover {
+  color: var(--dk-color-primary);
+  background-color: rgba(110, 31, 42, 0.05);
+}
+
+.dk-header__actions .wishlist-count,
+.dk-header__actions .cart-count {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background-color: var(--dk-color-primary);
+  color: var(--dk-color-white);
+  font-size: 10px;
+  font-weight: 600;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Desktop Category Navigation Bar */
+.dk-header__nav {
+  display: block;
+  background-color: var(--dk-color-background);
+}
+
+.dk-header__nav-container {
+  display: flex;
+  justify-content: center;
+}
+
+.dk-header__menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--dk-space-xl);
+}
+
+.dk-header__menu-item {
+  position: relative;
+}
+
+.dk-header__menu-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--dk-space-md) 0;
+  font-family: var(--dk-font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--dk-color-text);
+  text-decoration: none;
+  transition: color 0.25s ease;
+  position: relative;
+}
+
+.dk-header__menu-link::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--dk-color-primary);
+  transition: width 0.3s ease;
+}
+
+.dk-header__menu-link:hover,
+.dk-header__menu-link.is-active {
+  color: var(--dk-color-primary);
+}
+
+.dk-header__menu-link:hover::after,
+.dk-header__menu-link.is-active::after {
+  width: 100%;
+}
+
+.dk-header__menu-arrow {
+  transition: transform 0.25s ease;
+}
+
+.dk-header__menu-item:hover .dk-header__menu-arrow {
+  transform: rotate(180deg);
+}
+
+/* Mega Menu & Dropdown Placement */
+.dk-header__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 240px;
+  background-color: var(--dk-color-white);
+  border: 1px solid var(--dk-color-border);
+  box-shadow: 0 12px 30px rgba(110, 31, 42, 0.08);
+  border-radius: 0 0 var(--dk-radius-md) var(--dk-radius-md);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 1005;
+}
+
+.dk-header__menu-item:hover .dk-header__dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Mega Menu Component Styling */
+.dk-mega-menu {
+  width: 100vw;
+  max-width: 1240px;
+  padding: var(--dk-space-xl);
+  box-sizing: border-box;
+}
+
+.dk-mega-menu__container {
+  display: flex;
+  gap: var(--dk-space-2xl);
+  justify-content: space-between;
+}
+
+.dk-mega-menu__columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--dk-space-xl);
+  flex: 1;
+}
+
+.dk-mega-menu__heading {
+  font-family: var(--dk-font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--dk-color-primary);
+  text-decoration: none;
+  margin-bottom: var(--dk-space-sm);
+  display: block;
+  border-bottom: 1px solid var(--dk-color-border);
+  padding-bottom: var(--dk-space-xs);
+}
+
+.dk-mega-menu__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dk-mega-menu__item {
+  margin-bottom: var(--dk-space-xs);
+}
+
+.dk-mega-menu__link {
+  font-family: var(--dk-font-body);
+  font-size: 0.88rem;
+  color: var(--dk-color-text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.dk-mega-menu__link:hover {
+  color: var(--dk-color-primary);
+}
+
+/* Mega Menu Featured Card */
+.dk-mega-menu__featured {
+  width: 280px;
+  flex-shrink: 0;
+}
+
+.dk-mega-menu__featured-card {
+  display: block;
+  background-color: var(--dk-color-background-secondary);
+  border: 1px solid var(--dk-color-border);
+  border-radius: var(--dk-radius-md);
+  overflow: hidden;
+  text-decoration: none;
+  transition: var(--dk-transition);
+}
+
+.dk-mega-menu__featured-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--dk-shadow-hover);
+}
+
+.dk-mega-menu__featured-image-wrap {
+  height: 180px;
+  overflow: hidden;
+}
+
+.dk-mega-menu__featured-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.dk-mega-menu__featured-card:hover .dk-mega-menu__featured-image {
+  transform: scale(1.05);
+}
+
+.dk-mega-menu__featured-content {
+  padding: var(--dk-space-md);
+}
+
+.dk-mega-menu__featured-title {
+  font-family: var(--dk-font-heading);
+  font-size: 1.1rem;
+  color: var(--dk-color-text);
+  margin: var(--dk-space-xs) 0;
+}
+
+.dk-mega-menu__featured-btn {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--dk-color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   MOBILE SLIDE-OUT DRAWER NAVIGATION
+   ========================================================================== */
+.dk-mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  max-width: 85vw;
+  height: 100%;
+  background-color: var(--dk-color-background);
+  z-index: 10002;
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.dk-mobile-drawer.is-open {
+  transform: translateX(0);
+}
+
+.dk-mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(37, 37, 37, 0.5);
+  z-index: 10001;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.dk-mobile-overlay.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.dk-mobile-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--dk-space-md) var(--dk-space-lg);
+  border-bottom: 1px solid var(--dk-color-border);
+}
+
+.dk-mobile-drawer__close {
+  background: transparent;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--dk-color-text);
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dk-mobile-drawer__search {
+  padding: var(--dk-space-md) var(--dk-space-lg);
+  border-bottom: 1px solid var(--dk-color-border);
+}
+
+.dk-mobile-search-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dk-mobile-search-input {
+  width: 100%;
+  padding: 10px 40px 10px 14px;
+  min-height: 44px;
+  border: 1px solid var(--dk-color-border);
+  border-radius: var(--dk-radius-pill);
+  background-color: var(--dk-color-white);
+  font-family: inherit;
+  font-size: 0.88rem;
+  color: var(--dk-color-text);
+}
+
+.dk-mobile-search-btn {
+  position: absolute;
+  right: 6px;
+  background: transparent;
+  border: none;
+  color: var(--dk-color-text-muted);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dk-mobile-drawer__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--dk-space-md) 0;
+}
+
+.dk-mobile-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dk-mobile-menu__row,
+.dk-mobile-submenu__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--dk-space-xs) var(--dk-space-lg);
+}
+
+.dk-mobile-menu__link {
+  font-family: var(--dk-font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--dk-color-text);
+  text-decoration: none;
+  flex: 1;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.dk-mobile-menu__accordion-toggle {
+  background: transparent;
+  border: none;
+  color: var(--dk-color-text);
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease;
+}
+
+.dk-mobile-menu__accordion-toggle.is-open {
+  transform: rotate(180deg);
+  color: var(--dk-color-primary);
+}
+
+.dk-mobile-submenu {
+  list-style: none;
+  padding: 0 0 0 var(--dk-space-lg);
+  margin: 0;
+  background-color: rgba(110, 31, 42, 0.03);
+}
+
+.dk-mobile-submenu__link {
+  font-family: var(--dk-font-body);
+  font-size: 0.9rem;
+  color: var(--dk-color-text-muted);
+  text-decoration: none;
+  flex: 1;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.dk-mobile-grandchild-menu {
+  list-style: none;
+  padding: 0 0 0 var(--dk-space-lg);
+  margin: 0;
+}
+
+.dk-mobile-grandchild-link {
+  font-family: var(--dk-font-body);
+  font-size: 0.85rem;
+  color: var(--dk-color-text-muted);
+  text-decoration: none;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+}
+
+/* Responsive Header Breakpoints */
+@media (max-width: 992px) {
+  .dk-header__nav {
+    display: none;
+  }
+  .dk-header__toggle {
+    display: inline-flex;
+  }
+  .dk-header__top-container {
+    padding: 0 var(--dk-space-md);
+  }
+}

@@ -1,0 +1,413 @@
+{
+  "sections": {
+    "dk_hero": {
+      "type": "dk-hero",
+      "settings": {
+        "desktop_height": 80,
+        "mobile_height": 65,
+        "overlay_opacity": 15,
+        "subtitle": "",
+        "heading": "",
+        "description": "",
+        "button_label": "SHOP RAKHI COLLECTION",
+        "content_alignment": "center",
+        "bg_color": "#F9F5EE"
+      }
+    },
+    "dk_category_grid": {
+      "type": "dk-category-grid",
+      "settings": {
+        "subheading": "CURATED FOR YOU",
+        "heading": "Shop by Collection",
+        "bg_color": "#F9F5EE",
+        "padding_top": 60,
+        "padding_bottom": 60
+      },
+      "blocks": {
+        "cat_1": {
+          "type": "category_tile",
+          "settings": {
+            "title": "Royal Pearl Collection",
+            "subtitle": "Handcrafted Luxury"
+          }
+        },
+        "cat_2": {
+          "type": "category_tile",
+          "settings": {
+            "title": "Nazariya Collection",
+            "subtitle": "Evil Eye & Protection"
+          }
+        },
+        "cat_3": {
+          "type": "category_tile",
+          "settings": {
+            "title": "Blessed Collection",
+            "subtitle": "Krishna & Ganesha Edits"
+          }
+        },
+        "cat_4": {
+          "type": "category_tile",
+          "settings": {
+            "title": "Festive Rakhi Duos",
+            "subtitle": "Traditional Pairs"
+          }
+        },
+        "cat_5": {
+          "type": "category_tile",
+          "settings": {
+            "title": "Bhaiya Bhabhi & Lumba",
+            "subtitle": "Coordinated Keepsakes"
+          }
+        },
+        "cat_6": {
+          "type": "category_tile",
+          "settings": {
+            "title": "Rakhi Combos & Trios",
+            "subtitle": "Complete Gift Sets"
+          }
+        }
+      },
+      "block_order": [
+        "cat_1",
+        "cat_2",
+        "cat_3",
+        "cat_4",
+        "cat_5",
+        "cat_6"
+      ]
+    },
+    "dk_occasion_grid": {
+      "type": "dk-occasion-grid",
+      "settings": {
+        "subheading": "CELEBRATE EVERY MOMENT",
+        "heading": "Shop by Occasion",
+        "description": "Find thoughtfully curated handcrafted gifts for Raksha Bandhan, festive celebrations, weddings and more.",
+        "bg_color": "#F2E5DD",
+        "padding_top": 70,
+        "padding_bottom": 70
+      },
+      "blocks": {
+        "occ_1": {
+          "type": "occasion_tile",
+          "settings": {
+            "title": "Raksha Bandhan",
+            "description": "Cherished threads of protection and artisanal Rakhis."
+          }
+        },
+        "occ_2": {
+          "type": "occasion_tile",
+          "settings": {
+            "title": "Festive Celebrations",
+            "description": "Vibrant artisanal pieces for auspicious days."
+          }
+        },
+        "occ_3": {
+          "type": "occasion_tile",
+          "settings": {
+            "title": "Weddings & Milestones",
+            "description": "Timeless Indian heritage keepsakes."
+          }
+        },
+        "occ_4": {
+          "type": "occasion_tile",
+          "settings": {
+            "title": "Pooja & Devotion",
+            "description": "Divine blessings and sacred craftsmanship."
+          }
+        },
+        "occ_5": {
+          "type": "occasion_tile",
+          "settings": {
+            "title": "Family Gifting",
+            "description": "Thoughtful hampers for your closest ones."
+          }
+        },
+        "occ_6": {
+          "type": "occasion_tile",
+          "settings": {
+            "title": "Just Because",
+            "description": "Spontaneous tokens of affection and warmth."
+          }
+        }
+      },
+      "block_order": [
+        "occ_1",
+        "occ_2",
+        "occ_3",
+        "occ_4",
+        "occ_5",
+        "occ_6"
+      ]
+    },
+    "dk_featured_products": {
+      "type": "dk-featured-products",
+      "settings": {
+        "subheading": "HANDCRAFTED TREASURES",
+        "heading": "Our Favourites",
+        "description": "Most cherished pieces handcrafted for your celebrations.",
+        "products_to_show": 8,
+        "show_view_all": true,
+        "view_all_label": "VIEW ALL FAVOURITES",
+        "bg_color": "#F9F5EE",
+        "padding_top": 70,
+        "padding_bottom": 70
+      }
+    },
+    "dk_editorial_banner": {
+      "type": "dk-editorial-banner",
+      "settings": {
+        "overlay_opacity": 35,
+        "subheading": "THE FESTIVE EDIT",
+        "heading": "Crafted For Unforgettable Celebrations",
+        "text": "Thoughtfully crafted pieces for celebrations that deserve to be remembered.",
+        "button_label": "EXPLORE COLLECTION",
+        "content_alignment": "left",
+        "bg_color": "#6E1F2A"
+      }
+    },
+    "dk_recipient_grid": {
+      "type": "dk-recipient-grid",
+      "settings": {
+        "subheading": "GIFTS FOR YOUR PEOPLE",
+        "heading": "Find the Perfect Gift",
+        "description": "Thoughtful, hand-selected pieces for every special relationship.",
+        "bg_color": "#F9F5EE",
+        "padding_top": 70,
+        "padding_bottom": 70
+      },
+      "blocks": {
+        "rec_1": {
+          "type": "recipient_tile",
+          "settings": {
+            "title": "For Sister",
+            "tagline": "Cherished Keepsakes"
+          }
+        },
+        "rec_2": {
+          "type": "recipient_tile",
+          "settings": {
+            "title": "For Mother",
+            "tagline": "Warm & Elegant"
+          }
+        },
+        "rec_3": {
+          "type": "recipient_tile",
+          "settings": {
+            "title": "For Brother",
+            "tagline": "Handcrafted Rakhis"
+          }
+        },
+        "rec_4": {
+          "type": "recipient_tile",
+          "settings": {
+            "title": "For Bhabhi",
+            "tagline": "Graceful Lumba Sets"
+          }
+        },
+        "rec_5": {
+          "type": "recipient_tile",
+          "settings": {
+            "title": "For Family",
+            "tagline": "Festive Hampers"
+          }
+        },
+        "rec_6": {
+          "type": "recipient_tile",
+          "settings": {
+            "title": "For Couples",
+            "tagline": "Coordinated Pairs"
+          }
+        }
+      },
+      "block_order": [
+        "rec_1",
+        "rec_2",
+        "rec_3",
+        "rec_4",
+        "rec_5",
+        "rec_6"
+      ]
+    },
+    "dk_product_carousel": {
+      "type": "dk-product-carousel",
+      "settings": {
+        "subheading": "JUST ARRIVED",
+        "heading": "Trending Now",
+        "products_to_show": 8,
+        "bg_color": "#F2E5DD",
+        "padding_top": 70,
+        "padding_bottom": 70
+      }
+    },
+    "dk_rakhi_feature": {
+      "type": "dk-rakhi-feature",
+      "settings": {
+        "badge_text": "FESTIVE EDITION",
+        "subheading": "RAKHI, BUT MAKE IT BEAUTIFUL",
+        "heading": "Handcrafted Rakhis & Festive Hampers",
+        "description": "Celebrate the sacred bond of protection with intricately woven Rakhis, artisanal Lumba sets, and handcrafted festive thalis made to be treasured.",
+        "button_label": "EXPLORE RAKHI COLLECTION",
+        "bg_color": "#F9F5EE",
+        "padding_top": 70,
+        "padding_bottom": 70
+      },
+      "blocks": {
+        "rak_1": {
+          "type": "category_pill",
+          "settings": {
+            "title": "Premium Rakhis"
+          }
+        },
+        "rak_2": {
+          "type": "category_pill",
+          "settings": {
+            "title": "Rakhi Hampers"
+          }
+        },
+        "rak_3": {
+          "type": "category_pill",
+          "settings": {
+            "title": "Lumba Sets"
+          }
+        },
+        "rak_4": {
+          "type": "category_pill",
+          "settings": {
+            "title": "Rakhi Thali"
+          }
+        },
+        "rak_5": {
+          "type": "category_pill",
+          "settings": {
+            "title": "Kids Rakhi"
+          }
+        }
+      },
+      "block_order": [
+        "rak_1",
+        "rak_2",
+        "rak_3",
+        "rak_4",
+        "rak_5"
+      ]
+    },
+    "dk_brand_story": {
+      "type": "dk-brand-story",
+      "settings": {
+        "subheading": "OUR HERITAGE & PASSION",
+        "heading": "The Art of DELISHA KARIGARI",
+        "text": "<p>Rooted in Indian artistry, DELISHA KARIGARI brings together traditional craftsmanship and contemporary design to create pieces made for meaningful celebrations.</p><p>Every creation is handcrafted with patience, reverence for detail, and a deep love for Indian heritage.</p>",
+        "signature": "— Handcrafted with love in India",
+        "button_label": "READ OUR FULL STORY",
+        "bg_color": "#F2E5DD",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "dk_trust": {
+      "type": "dk-trust",
+      "settings": {
+        "bg_color": "#F9F5EE",
+        "padding_top": 50,
+        "padding_bottom": 50
+      },
+      "blocks": {
+        "trust_1": {
+          "type": "trust_item",
+          "settings": {
+            "title": "Handcrafted with Care",
+            "text": "Artisanal Indian precision"
+          }
+        },
+        "trust_2": {
+          "type": "trust_item",
+          "settings": {
+            "title": "Premium Finish",
+            "text": "Highest quality materials"
+          }
+        },
+        "trust_3": {
+          "type": "trust_item",
+          "settings": {
+            "title": "Made for Gifting",
+            "text": "Luxury gift packaging ready"
+          }
+        },
+        "trust_4": {
+          "type": "trust_item",
+          "settings": {
+            "title": "Pan-India Delivery",
+            "text": "Safe & fast dispatch"
+          }
+        },
+        "trust_5": {
+          "type": "trust_item",
+          "settings": {
+            "title": "Secure Checkout",
+            "text": "100% protected payments"
+          }
+        }
+      },
+      "block_order": [
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "trust_4",
+        "trust_5"
+      ]
+    },
+    "dk_social_gallery": {
+      "type": "dk-social-gallery",
+      "settings": {
+        "subheading": "CELEBRATE WITH US",
+        "heading": "Follow Our Karigari",
+        "instagram_handle": "delishakarigari",
+        "bg_color": "#F2E5DD",
+        "padding_top": 70,
+        "padding_bottom": 70
+      },
+      "blocks": {
+        "soc_1": { "type": "social_image" },
+        "soc_2": { "type": "social_image" },
+        "soc_3": { "type": "social_image" },
+        "soc_4": { "type": "social_image" },
+        "soc_5": { "type": "social_image" },
+        "soc_6": { "type": "social_image" }
+      },
+      "block_order": [
+        "soc_1",
+        "soc_2",
+        "soc_3",
+        "soc_4",
+        "soc_5",
+        "soc_6"
+      ]
+    },
+    "dk_newsletter": {
+      "type": "dk-newsletter",
+      "settings": {
+        "subheading": "JOIN OUR FAMILY",
+        "heading": "Stay in the DELISHA Circle",
+        "text": "Be the first to discover new collections, festive edits, artisanal stories and special member offers.",
+        "button_label": "JOIN US",
+        "bg_color": "#6E1F2A",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "dk_hero",
+    "dk_category_grid",
+    "dk_occasion_grid",
+    "dk_featured_products",
+    "dk_editorial_banner",
+    "dk_recipient_grid",
+    "dk_product_carousel",
+    "dk_rakhi_feature",
+    "dk_brand_story",
+    "dk_trust",
+    "dk_social_gallery",
+    "dk_newsletter"
+  ]
+}

@@ -1,0 +1,202 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#6E1F2A">
+  <link rel="icon" type="image/png" href="{{ 'dk-favicon.png' | asset_url }}">
+  <link rel="apple-touch-icon" href="{{ 'dk-favicon.png' | asset_url }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- comment -%} Robots meta — noindex search, cart, and account pages {%- endcomment -%}
+  {%- if request.path contains '/search' or request.path contains '/cart' or request.path contains '/account' -%}
+    <meta name="robots" content="noindex, follow">
+  {%- endif -%}
+
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  {%- comment -%} Open Graph Tags {%- endcomment -%}
+  <meta property="og:site_name" content="{{ shop.name }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:title" content="{{ page_title | escape }}">
+  {%- if page_description -%}
+    <meta property="og:description" content="{{ page_description | escape }}">
+  {%- endif -%}
+  {%- if product -%}
+    <meta property="og:type" content="product">
+    {%- if product.featured_image -%}
+      <meta property="og:image" content="https:{{ product.featured_image | image_url: width: 1200 }}">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:alt" content="{{ product.featured_image.alt | default: product.title | escape }}">
+    {%- endif -%}
+    <meta property="product:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
+    <meta property="product:price:currency" content="{{ cart.currency.iso_code | default: 'INR' }}">
+  {%- elsif collection -%}
+    <meta property="og:type" content="product.group">
+    {%- if collection.image -%}
+      <meta property="og:image" content="https:{{ collection.image | image_url: width: 1200 }}">
+    {%- endif -%}
+  {%- else -%}
+    <meta property="og:type" content="website">
+  {%- endif -%}
+
+  {%- comment -%} Twitter Card Tags {%- endcomment -%}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page_title | escape }}">
+  {%- if page_description -%}
+    <meta name="twitter:description" content="{{ page_description | escape }}">
+  {%- endif -%}
+  {%- if product.featured_image -%}
+    <meta name="twitter:image" content="https:{{ product.featured_image | image_url: width: 1200 }}">
+  {%- endif -%}
+
+  {{ content_for_header }}
+
+  {% # theme-check-disable RemoteAsset %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  {% # theme-check-enable RemoteAsset %}
+
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  <script>
+    window.theme = {
+        moneyFormat: {{ shop.money_format | json }}
+      };
+  </script>
+  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'wishlist.js' | asset_url }}" defer="defer"></script>
+
+  {%- comment -%} JSON-LD Structured Data {%- endcomment -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }},
+    "sameAs": []
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }},
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{{ shop.url }}/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  {%- if product -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "url": {{ canonical_url | json }},
+    {%- if product.featured_image -%}
+    "image": {{ product.featured_image | image_url: width: 1200 | prepend: 'https:' | json }},
+    {%- endif -%}
+    {%- if product.description != blank -%}
+    "description": {{ product.description | strip_html | truncatewords: 100 | json }},
+    {%- endif -%}
+    "brand": {
+      "@type": "Brand",
+      "name": {{ product.vendor | default: shop.name | json }}
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": {{ canonical_url | json }},
+      "priceCurrency": {{ cart.currency.iso_code | default: 'INR' | json }},
+      "price": {{ product.price | money_without_currency | strip_html | json }},
+      "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
+    }
+  }
+  </script>
+  {%- endif -%}
+</head>
+
+<body>
+  {% section 'announcement-bar' %}
+  {% section 'header' %}
+
+  <main role="main" id="MainContent">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+  {% section 'cart-drawer' %}
+  {% section 'wishlist-drawer' %}
+  {% render 'search-modal' %}
+  
+  <a href="https://wa.me/919211549097?text=Hi%20Delisha%20Karigari,%20I'm%20interested%20in%20your%20Rakhi%20collection."
+    class="delisha-whatsapp-float" target="_blank" rel="noopener" aria-label="Chat with Delisha Karigari on WhatsApp">
+    <svg class="delisha-whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" fill="white">
+      <path d="M16.004 0h-.008C7.174 0 0 7.176 0 16.004c0 3.5 1.129 6.744 3.047 9.378L1.054 31.14l5.957-1.964A15.907 15.907 0 0016.004 32C24.826 32 32 24.826 32 16.004 32 7.176 24.826 0 16.004 0zm9.314 22.606c-.39 1.1-1.932 2.014-3.168 2.28-.846.18-1.95.324-5.668-1.218-4.76-1.97-7.822-6.803-8.06-7.117-.228-.314-1.918-2.556-1.918-4.876 0-2.318 1.214-3.458 1.646-3.93.39-.428 1.024-.642 1.63-.642.196 0 .372.01.53.018.468.02.702.048 1.012.784.386.918 1.326 3.236 1.442 3.47.118.236.236.554.078.868-.148.324-.276.468-.512.738-.236.27-.46.478-.696.77-.216.254-.46.526-.196.994.264.46 1.176 1.938 2.524 3.14 1.734 1.546 3.194 2.026 3.648 2.252.352.176.77.148 1.044-.138.35-.364.782-.966 1.222-1.56.314-.424.71-.478 1.098-.314.392.156 2.494 1.176 2.922 1.392.428.216.714.324.818.502.106.178.106 1.03-.284 2.13z"/>
+    </svg>
+  </a>
+  
+  <style>
+    .delisha-whatsapp-float {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      text-decoration: none;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.20);
+      transition: transform 0.25s ease;
+    }
+  
+    .delisha-whatsapp-float:hover {
+      transform: scale(1.08);
+    }
+  
+    .delisha-whatsapp-float .delisha-whatsapp-icon {
+      width: 30px;
+      height: 30px;
+      display: block;
+    }
+  
+    @media screen and (max-width: 768px) {
+      .delisha-whatsapp-float {
+        width: 52px;
+        height: 52px;
+        right: 16px;
+        bottom: 16px;
+      }
+  
+      .delisha-whatsapp-float .delisha-whatsapp-icon {
+        width: 27px;
+        height: 27px;
+      }
+    }
+  </style>
+</body>
+
+</html>

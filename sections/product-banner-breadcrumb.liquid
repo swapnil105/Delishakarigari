@@ -1,0 +1,221 @@
+<div class="product-hero-banner {% if section.settings.background_type == 'color' %}banner-color{% endif %}" style="
+  {% if section.settings.background_type == 'image' and section.settings.banner_image != blank %}
+    background-image:url('{{ section.settings.banner_image | image_url: width: 2000 }}');
+  {% else %}
+    background-color: {{ section.settings.banner_bg_color }};
+  {% endif %}
+  color: {{ section.settings.banner_text_color }};
+">
+
+  <div class="prod-container">
+
+    {% if section.settings.show_title %}
+    <h1 class="prod-hero-title">
+      {{ product.title }}
+    </h1>
+    {% endif %}
+
+    {% if section.settings.show_breadcrumb %}
+  <nav class="prod-hero-breadcrumb">
+    <a href="{{ routes.root_url }}">Home</a>
+    <span class="sep">›</span>
+
+    <a href="{{ routes.all_products_collection_url }}">Catalog</a>
+    <span class="sep">›</span>
+
+    <span class="current">{{ product.title }}</span>
+  </nav>
+{% endif %}
+  </div>
+</div>
+
+<style>
+  .product-hero-banner {
+    padding: 80px 0;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+
+  .product-hero-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+
+    background:rgba(0, 0, 0, {{ section.settings.overlay_opacity }});
+  }
+
+  .product-hero-banner.banner-color::before {
+    display: none;
+  }
+
+  .product-hero-banner .prod-container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .prod-container {
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .prod-hero-title {
+    font-size: {{ section.settings.title_size }}px;
+    margin:0 0 15px;
+    line-height:1.2;
+    color:inherit;
+  }
+
+.prod-hero-breadcrumb{
+  font-size:{{ section.settings.breadcrumb_size }}px;
+  margin-top:{{ section.settings.breadcrumb_top_spacing }}px;
+  margin-bottom:{{ section.settings.breadcrumb_bottom_spacing }}px;
+}
+
+  .prod-hero-breadcrumb a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .prod-hero-breadcrumb .sep {
+    margin: 0 10px;
+  }
+
+  .prod-hero-breadcrumb .current {
+    opacity: 0.85;
+  }
+
+  @media(max-width:768px) {
+
+    .product-hero-banner {
+      padding: 50px 0;
+    }
+
+    .prod-hero-title {
+      font-size:calc({{ section.settings.title_size }}px * 0.7);
+  }
+
+  .prod-hero-breadcrumb {
+    font-size:calc({{ section.settings.breadcrumb_size }}px * 0.9);
+  }
+  }
+</style>
+
+{% schema %}
+{
+"name": "Product Banner",
+"settings": [
+{
+"type": "select",
+"id": "background_type",
+"label": "Background Type",
+"options": [
+{
+"value": "image",
+"label": "Background Image"
+},
+{
+"value": "color",
+"label": "Background Color"
+}
+],
+"default": "image"
+},
+{
+"type": "image_picker",
+"id": "banner_image",
+"label": "Banner Background Image"
+},
+{
+"type": "color",
+"id": "banner_bg_color",
+"label": "Background Color",
+"default": "#1a1a1a"
+},
+{
+"type": "color",
+"id": "banner_text_color",
+"label": "Text Color",
+"default": "#ffffff"
+},
+{
+"type": "range",
+"id": "overlay_opacity",
+"label": "Image Overlay Opacity",
+"min": 0,
+"max": 1,
+"step": 0.1,
+"default": 0.6
+},
+{
+"type": "header",
+"content": "Product Title Settings"
+},
+{
+"type": "checkbox",
+"id": "show_title",
+"label": "Show Product Title",
+"default": true
+},
+{
+"type": "range",
+"id": "title_size",
+"label": "Title Font Size",
+"min": 20,
+"max": 80,
+"step": 2,
+"unit": "px",
+"default": 48
+},
+{
+"type": "header",
+"content": "Breadcrumb Settings"
+},
+{
+"type": "checkbox",
+"id": "show_breadcrumb",
+"label": "Show Breadcrumb",
+"default": true
+},
+{
+"type": "range",
+"id": "breadcrumb_size",
+"label": "Breadcrumb Font Size",
+"min": 10,
+"max": 24,
+"step": 1,
+"unit": "px",
+"default": 14
+},
+{
+  "type": "range",
+  "id": "breadcrumb_top_spacing",
+  "label": "Breadcrumb Top Spacing",
+  "min": 0,
+  "max": 200,
+  "step": 5,
+  "unit": "px",
+  "default": 40
+},
+{
+  "type": "range",
+  "id": "breadcrumb_bottom_spacing",
+  "label": "Breadcrumb Bottom Spacing",
+  "min": 0,
+  "max": 200,
+  "step": 5,
+  "unit": "px",
+  "default": 0
+}
+],
+"presets": [
+{
+"name": "Product Banner"
+}
+]
+}
+{% endschema %}

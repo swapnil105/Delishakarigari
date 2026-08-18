@@ -1,0 +1,239 @@
+{%- unless collection.handle == 'all' -%}
+<div class="collection-hero-banner" style="
+  {% if section.settings.show_image and collection.image %}
+    background-image: url('{{ collection.image | image_url: width: 2000 }}');
+  {% elsif section.settings.banner_image != blank %}
+    background-image: url('{{ section.settings.banner_image | image_url: width: 2000 }}');
+  {% else %}
+    background-color: {{ section.settings.banner_bg_color | default: '#1a1a1a' }};
+  {% endif %}
+  color: {{ section.settings.banner_text_color | default: '#ffffff' }};
+">
+  <div class="collection-banner-overlay"
+    style="background-color: {{ section.settings.overlay_color | default: '#000000' }}; opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};">
+  </div>
+
+  <div class="collection-banner-container">
+    {% if section.settings.show_breadcrumb %}
+    <nav class="collection-breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span class="sep">›</span>
+      <a href="{{ routes.collections_url | default: '/collections' }}">Collections</a>
+      <span class="sep">›</span>
+      <span class="current">{{ collection.title | default: 'Collection' }}</span>
+    </nav>
+    {% endif %}
+
+    <h1 class="collection-hero-title">
+      {{ collection.title | default: section.settings.fallback_title | default: 'Collection' }}
+    </h1>
+
+    {% if section.settings.show_description and collection.description != blank %}
+    <div class="collection-hero-description">
+      {{ collection.description }}
+    </div>
+    {% endif %}
+  </div>
+</div>
+{%- endunless -%}
+
+<style>
+  .collection-hero-banner {
+    position: relative;
+    width: 100%;
+
+    min-height: {
+        {
+        section.settings.desktop_height | default: 280
+      }
+    }
+
+    px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    padding: 50px 20px;
+    box-sizing: border-box;
+  }
+
+  .collection-banner-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .collection-banner-container {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .collection-breadcrumb {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    opacity: 0.9;
+  }
+
+  .collection-breadcrumb a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .collection-breadcrumb a:hover {
+    opacity: 0.75;
+    text-decoration: underline;
+  }
+
+  .collection-breadcrumb .sep {
+    margin: 0 8px;
+    opacity: 0.6;
+  }
+
+  .collection-breadcrumb .current {
+    font-weight: 500;
+    opacity: 1;
+  }
+
+  .collection-hero-title {
+    font-family: 'Playfair Display', serif;
+
+    font-size: {
+        {
+        section.settings.title_size | default: 42
+      }
+    }
+
+    px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
+    color: inherit;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  }
+
+  .collection-hero-description {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-top: 5px;
+    opacity: 0.95;
+  }
+
+  @media (max-width: 768px) {
+    .collection-hero-banner {
+      min-height: 200px;
+      padding: 35px 15px;
+    }
+
+    .collection-hero-title {
+      font-size: 28px;
+    }
+
+    .collection-breadcrumb {
+      font-size: 12px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+"name": "Collection Banner",
+"settings": [
+{
+"type": "text",
+"id": "fallback_title",
+"label": "Fallback Title (if empty)",
+"default": "Collection"
+},
+{
+"type": "checkbox",
+"id": "show_image",
+"label": "Show Collection Featured Image",
+"default": true
+},
+{
+"type": "image_picker",
+"id": "banner_image",
+"label": "Custom Banner Background Image"
+},
+{
+"type": "color",
+"id": "banner_bg_color",
+"label": "Background Color",
+"default": "#1a1a1a"
+},
+{
+"type": "color",
+"id": "banner_text_color",
+"label": "Text Color",
+"default": "#ffffff"
+},
+{
+"type": "color",
+"id": "overlay_color",
+"label": "Overlay Color",
+"default": "#000000"
+},
+{
+"type": "range",
+"id": "overlay_opacity",
+"label": "Overlay Opacity (%)",
+"min": 0,
+"max": 80,
+"step": 5,
+"default": 30
+},
+{
+"type": "range",
+"id": "desktop_height",
+"label": "Banner Desktop Height (px)",
+"min": 180,
+"max": 500,
+"step": 10,
+"default": 280
+},
+{
+"type": "range",
+"id": "title_size",
+"label": "Title Font Size (px)",
+"min": 24,
+"max": 64,
+"step": 2,
+"default": 42
+},
+{
+"type": "checkbox",
+"id": "show_breadcrumb",
+"label": "Show Breadcrumb",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "show_description",
+"label": "Show Collection Description",
+"default": true
+}
+],
+"presets": [
+{
+"name": "Collection Banner"
+}
+]
+}
+{% endschema %}

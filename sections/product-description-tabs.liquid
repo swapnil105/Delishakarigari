@@ -1,0 +1,233 @@
+<div class="product-tabs-wrapper" style="background: {{ section.settings.bg_color }};">
+  <div class="tabs-container">
+<div class="tabs-header">
+
+  {% if section.settings.show_description %}
+    <button class="tab-btn active" onclick="openTab(event,'Description-{{ section.id }}')">
+      Description
+    </button>
+  {% endif %}
+
+  {% if section.settings.show_shipping %}
+    <button class="tab-btn" onclick="openTab(event,'Shipping-{{ section.id }}')">
+      Shipping Information
+    </button>
+  {% endif %}
+
+  {% if section.settings.show_reviews %}
+    <button class="tab-btn" onclick="openTab(event,'Reviews-{{ section.id }}')">
+      Reviews
+    </button>
+  {% endif %}
+
+</div>
+
+{% if section.settings.show_description %}
+  <div id="Description-{{ section.id }}" class="tab-content active">
+    {{ product.description }}
+  </div>
+{% endif %}
+
+{% if section.settings.show_shipping %}
+  <div id="Shipping-{{ section.id }}" class="tab-content">
+    {{ section.settings.shipping_content }}
+  </div>
+{% endif %}
+
+{% if section.settings.show_reviews %}
+  <div id="Reviews-{{ section.id }}" class="tab-content">
+    {{ section.settings.review_content }}
+  </div>
+{% endif %}
+
+  </div>
+</div>
+
+<style>
+.product-tabs-wrapper{
+  background: {{ section.settings.bg_color }};
+  padding-top: {{ section.settings.section_padding_top }}px;
+  padding-bottom: {{ section.settings.section_padding_bottom }}px;
+}
+
+.tabs-container{
+  width:90%;
+  max-width:1300px;
+  margin:0 auto;
+}
+
+.tabs-header{
+  display:flex;
+  align-items:center;
+  gap:40px;
+  border-bottom:1px solid #e5e5e5;
+  margin-bottom:40px;
+  flex-wrap:wrap;
+}
+
+.tab-btn{
+  background:none;
+  border:none;
+  cursor:pointer;
+  font-size:{{ section.settings.tab_font_size }}px;
+  font-weight:600;
+  padding:15px 0;
+  color:#999;
+  position:relative;
+  white-space:nowrap;
+}
+
+.tab-btn.active{
+  color:#000;
+}
+
+.tab-btn.active::after{
+  content:'';
+  position:absolute;
+  left:0;
+  bottom:-1px;
+  width:100%;
+  height:2px;
+  background:{{ section.settings.active_color }};
+}
+
+.tab-content{
+  display:none;
+  line-height:1.9;
+  color:#555;
+  font-size:{{ section.settings.content_font_size }}px;
+}
+
+.tab-content.active{
+  display:block;
+}
+
+@media(max-width:768px){
+
+  .tabs-header{
+    gap:20px;
+  }
+
+  .tab-btn{
+    font-size:14px;
+  }
+
+  .tab-content{
+    font-size:15px;
+  }
+
+}
+</style>
+
+<script>
+function openTab(evt, tabName){
+
+  var tabContainer = evt.currentTarget.closest('.tabs-container');
+
+  var tabcontent = tabContainer.querySelectorAll('.tab-content');
+  tabcontent.forEach(function(tab){
+    tab.classList.remove('active');
+  });
+
+  var tablinks = tabContainer.querySelectorAll('.tab-btn');
+  tablinks.forEach(function(btn){
+    btn.classList.remove('active');
+  });
+
+  document.getElementById(tabName).classList.add('active');
+  evt.currentTarget.classList.add('active');
+}
+</script>
+
+{% schema %}
+{
+"name": "Product Description Tabs",
+"settings": [
+{
+"type": "color",
+"id": "bg_color",
+"label": "Background Color",
+"default": "#ffffff"
+},
+{
+"type": "color",
+"id": "active_color",
+"label": "Active Tab Color",
+"default": "#d8a85e"
+},
+{
+"type": "checkbox",
+"id": "show_description",
+"label": "Show Description Tab",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "show_shipping",
+"label": "Show Shipping Tab",
+"default": true
+},
+{
+"type": "checkbox",
+"id": "show_reviews",
+"label": "Show Reviews Tab",
+"default": true
+},
+{
+"type": "richtext",
+"id": "shipping_content",
+"label": "Shipping Content"
+},
+{
+"type": "richtext",
+"id": "review_content",
+"label": "Review Content"
+},
+{
+"type": "range",
+"id": "tab_font_size",
+"min": 12,
+"max": 30,
+"step": 1,
+"unit": "px",
+"label": "Tab Font Size",
+"default": 18
+},
+{
+"type": "range",
+"id": "content_font_size",
+"min": 12,
+"max": 24,
+"step": 1,
+"unit": "px",
+"label": "Content Font Size",
+"default": 16
+},
+{
+"type": "range",
+"id": "section_padding_top",
+"min": 0,
+"max": 150,
+"step": 5,
+"unit": "px",
+"label": "Top Padding",
+"default": 60
+},
+{
+"type": "range",
+"id": "section_padding_bottom",
+"min": 0,
+"max": 150,
+"step": 5,
+"unit": "px",
+"label": "Bottom Padding",
+"default": 60
+}
+],
+"presets": [
+{
+"name": "Product Description Tabs"
+}
+]
+}
+{% endschema %}
